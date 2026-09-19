@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jade Ocean</title>
+<meta name="description" content="Small website jobs for small organisations, done properly. Wrong dates, broken links, last season's programme: fixed for a price agreed before any work starts.">
+<link rel="canonical" href="https://jadeocean.uk/">
+<meta property="og:title" content="Jade Ocean">
+<meta property="og:description" content="Small website jobs for small organisations, done properly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jadeocean.uk/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2312795F'/%3E%3Cpath d='M12 38c7-6 13-6 20 0s13 6 20 0' fill='none' stroke='%23EFF5F3' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #EFF5F3;
+    --surface: #F9FCFB;
+    --ink: #0F2B2D;
+    --muted: #55706F;
+    --jade: #12795F;
+    --deep: #0A4A4C;
+    --line: #CFDEDA;
+    --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0A1B1C;
+      --surface: #10272A;
+      --ink: #E3EEEB;
+      --muted: #8FA9A6;
+      --jade: #56C9A6;
+      --deep: #9ADBC8;
+      --line: #1F3C3E;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  a { color: var(--jade); text-underline-offset: 0.18em; }
+  a:hover { color: var(--deep); }
+  a:focus-visible, .button:focus-visible {
+    outline: 3px solid var(--jade);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .page {
+    max-width: 62rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+    padding-block: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+  }
+
+  /* masthead */
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.875rem;
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .wordmark span { color: var(--jade); }
+
+  /* hero */
+  .hero { display: flex; flex-direction: column; gap: 1.75rem; }
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin: 0;
+    max-width: 14ch;
+    text-wrap: balance;
+  }
+  .lede { max-width: 38rem; margin: 0; font-size: 1.25rem; line-height: 1.55; }
+
+  .button {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--jade);
+    color: var(--ground);
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.85rem 1.25rem;
+    border-radius: 3px;
+  }
+  .button:hover { background: var(--deep); color: var(--ground); }
+
+  /* proof marks */
+  .proof {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem 1.5rem;
+    max-width: 44rem;
+  }
+  .proof-label, .rail {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .proof-label { margin: 0 0 1rem; }
+  .proof ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    font-family: var(--mono);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .proof li { display: flex; flex-direction: column; gap: 0.15rem; }
+  .proof del { color: var(--muted); text-decoration-thickness: 1.5px; }
+  .proof ins { color: var(--jade); text-decoration: none; font-weight: 500; }
+  .proof ins::before { content: "\2038\00a0"; opacity: 0.7; }
+
+  /* sections: rail + content */
+  .section {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 40rem);
+    gap: 1rem 2.5rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+  }
+  .rail { margin: 0; padding-top: 0.45rem; }
+  .content { display: flex; flex-direction: column; gap: 1.5rem; }
+  .content > p { margin: 0; }
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* prices */
+  .prices { margin: 0; display: flex; flex-direction: column; }
+  .price {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 1.5rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .price:first-child { padding-top: 0; }
+  .price dt { font-weight: 700; }
+  .price .amount {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 1.125rem;
+    color: var(--jade);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .price dd { margin: 0; grid-column: 1 / -1; color: var(--muted); max-width: 34rem; }
+
+  /* steps: a real sequence */
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+  .steps li::before {
+    content: counter(step);
+    font-family: var(--mono);
+    font-weight: 500;
+    color: var(--jade);
+    padding-top: 0.05rem;
+  }
+  .steps strong { display: block; }
+  .steps span { color: var(--muted); }
+
+  .note {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border-left: 3px solid var(--jade);
+    font-size: 1rem;
+  }
+
+  /* work */
+  .work { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+  .work li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1.5rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .work li:first-child { padding-top: 0; }
+  .work a { font-family: var(--mono); font-weight: 500; }
+  .work span { color: var(--muted); font-size: 1rem; }
+
+  /* contact */
+  .contact-line { font-family: var(--mono); font-size: clamp(1.15rem, 3.4vw, 1.6rem); font-weight: 500; overflow-wrap: anywhere; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  footer p { margin: 0; }
+
+  @media (max-width: 44rem) {
+    .page { gap: 3.5rem; }
+    .section { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+    .rail { padding-top: 0; }
+    body { font-size: 1.0625rem; }
+    .lede { font-size: 1.15rem; }
+    .proof { padding: 1rem 1.1rem 1.25rem; }
+    .proof ul { font-size: 0.9375rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .button, a { transition: background-color 120ms ease, color 120ms ease; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <a class="wordmark" href="/">Jade <span>Ocean</span></a>
+    <a href="mailto:hello@jadeocean.uk">hello@jadeocean.uk</a>
+  </header>
+
+  <main class="hero">
+    <h1>Small website jobs, done properly.</h1>
+    <p class="lede">I'm Adi. I fix and look after the websites of small organisations: concert societies, festivals, summer schools, restaurants, shops. Last season's dates, a booking link that goes nowhere, a page nobody has dared touch. You get a price before I start, and the work is usually done within a few days.</p>
+    <a class="button" href="mailto:hello@jadeocean.uk?subject=Website%20help">Email me about your site</a>
+
+    <div class="proof" aria-label="Examples of typical corrections">
+      <p class="proof-label">The kind of thing I fix</p>
+      <ul>
+        <li><del>Welcome to our 2025/26 season</del><ins>Welcome to our 2026/27 season</ins></li>
+        <li><del>Next concert: Saturday 14 March</del><ins>Next concert: Saturday 13 March 2027, 7.30pm</ins></li>
+        <li><del>Tickets on sale now! (for an event in June)</del><ins>Booking for 2027 opens 1 February</ins></li>
+        <li><del>&copy; 2019</del><ins>&copy; 2026</ins></li>
+      </ul>
+    </div>
+  </main>
+
+  <section class="section" aria-labelledby="prices-h">
+    <p class="rail">Prices</p>
+    <div class="content">
+      <h2 id="prices-h">Fixed prices, agreed before any work starts.</h2>
+      <dl class="prices">
+        <div class="price">
+          <dt>Small fix</dt>
+          <div class="amount">&pound;95</div>
+          <dd>One clear problem. A wrong date, a dead link, a form that goes nowhere, a page stuck on last year.</dd>
+        </div>
+        <div class="price">
+          <dt>Season refresh</dt>
+          <div class="amount">&pound;250</div>
+          <dd>The whole site brought up to the new season or year: programme, dates, prices, booking links and anything left over from the last one.</dd>
+        </div>
+        <div class="price">
+          <dt>Anything bigger</dt>
+          <div class="amount">Quoted first</div>
+          <dd>New pages, a move to a different platform, a rebuild. You get a fixed quote in writing, and nothing starts until you say yes.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="how-h">
+    <p class="rail">How it works</p>
+    <div class="content">
+      <h2 id="how-h">You keep your site and your passwords.</h2>
+      <ol class="steps">
+        <li><div><strong>You tell me what's wrong.</strong><span>Or I've written to you because I noticed something on your site.</span></div></li>
+        <li><div><strong>I reply with a fixed price.</strong><span>No work starts until you've agreed it.</span></div></li>
+        <li><div><strong>You invite me as an editor.</strong><span>I never ask for your password. An editor can correct pages but can't see your billing or delete the site. I'll send you the exact steps for your platform.</span></div></li>
+        <li><div><strong>I make the change and you check it.</strong><span>Then you remove my access. It takes about ten seconds.</span></div></li>
+      </ol>
+      <p class="note">For committees and trustees: sharing one password between people is what charity guidance tells you not to do. <a href="https://www.ncvo.org.uk/help-and-guidance/digital-technology/data-protection-and-cybersecurity/five-steps-cybersecurity-every-group-needs/using-passwords-protect-your-data/">NCVO's cybersecurity guidance</a> says to give each person their own login with the least access they need. An editor invitation does exactly that.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="work-h">
+    <p class="rail">Work</p>
+    <div class="content">
+      <h2 id="work-h">Jade Ocean is two people.</h2>
+      <ul class="work">
+        <li><a href="https://zejufan.com">zejufan.com</a><span>Site for a concert pianist. Built and kept up to date by Adi.</span></li>
+        <li><a href="https://gatex.fund">gatex.fund</a><span>Site for an advisory firm. Built by my business partner.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="contact-h">
+    <p class="rail">Contact</p>
+    <div class="content">
+      <h2 id="contact-h">Send me the page that's bothering you.</h2>
+      <p>A link and one line about what's wrong is enough. I'll reply with a price, or tell you if it isn't a job for me.</p>
+      <p class="contact-line"><a href="mailto:hello@jadeocean.uk">hello@jadeocean.uk</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Jade Ocean Ltd. Registered in England and Wales, company number 16383304.</p>
+    <!-- TODO before launch: add the registered office address here (required on a UK company website). -->
+    <p>Based in London. Working with organisations across the UK.</p>
+  </footer>
+
+</div>
+</body>
+</html>
